@@ -39,10 +39,24 @@
             </div>
         </div>
         <div id="login"  v-if="loggedin">
-            <h1> This is the user area</h1>
-            <button v-on:click="handleLogout">Logout</button>
+        <h1> This is the user area</h1>
+            <div class="dashboard">
+        <button v-on:click="handleLogout">Logout</button>
+
+        <h1>Choose a quiz</h1>
+        <!-- <button> Choose </button> -->
+        <button v-on:click="getQuizzes">Get</button> <button v-on:click="postQuiz"> Post</button>
+
+        <div><button> Partial Update(PATCH)</button></div>
+
+        <div class="QuizOne">
+            <h1>{{quiz}} </h1>
+            <button v-on:click="deleteQuiz">Delete</button> <button v-on:click="updateQuiz">Update</button>
         </div>
 
+            </div>
+        </div>
+       
 
     </div>
 </body>

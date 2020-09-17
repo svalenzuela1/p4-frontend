@@ -10,7 +10,8 @@ const app = new Vue({
         devURL: "http://localhost:8000",
         prodURL: null,
         user: null,
-        token: null
+        token: null,
+        quizzes: []
     }, 
     methods: {
         handleLogin: function(){
@@ -27,15 +28,23 @@ const app = new Vue({
             })
             .then(response => response.json())
             .then(data => {
-                this.user = data,user 
+
+                // if (data.error){
+
+                //     alert("error logging in")
+
+                // } else {
+
+                this.user = data.user
                 this.token = data.token
                 this.loggedin = true 
+                // this.getQuizzes()
 
                 //UNCOMMENT WHEN ADDING FINISHING TOUCHES
                 // this.loginUN = ""
                 // this.loginPW = ""
                 //The above just resets username and password 
-                
+            //}
             })
         },
         handleLogout: function(){
@@ -62,6 +71,68 @@ const app = new Vue({
 
             //  alert("SIGNUP SUCCESSFUL")
 
+        },
+        getQuizzes: function(){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+
+            fetch(`${URL}/quiz/quiz/`, {
+                method: "GET",
+                headers:{
+                    "Content-Type": "application.json",
+                    Authorization: `JWT ${this.token}`
+                }
+
+            })
+            .then(response => response.json())
+            .then(data => {
+                //this.quizzes = data
+                console.log(data)
+            })
+        }, 
+        postQuiz: function(){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+
+            fetch(`${URL}/quiz/quiz/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application.json",
+                    Authorization: `JWT ${this.token}`
+                }
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+            })
+        }, 
+        updateQuiz: function(){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+
+            fetch(`${URL}/quiz/quiz/id/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application.json",
+                    Authorization: `JWT ${this.token}`
+                }
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+            })
+        }, 
+        deleteQuiz: function(){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+
+            fetch(`${URL}/quiz/quiz/id`,{
+                method: "DELETE", 
+                headers: {
+                    "Content-Type": "application.json", 
+                    Authroization: `JWT ${this.token}`
+                }
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+            })
         }
     }
 })
