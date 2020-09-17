@@ -32,6 +32,7 @@
                 <fieldset> <legend>Create User</legend>
                     <input type="text" placeholder="username" v-model="createUN">
                     <input type="password" placeholder="password" v-model="createPW">
+                    
                     <input type="text" placeholder="email">
                     <button v-on:click="handleSignup">Create User</button>
                 </fieldset>
@@ -42,17 +43,31 @@
         <h1> This is the user area</h1>
             <div class="dashboard">
         <button v-on:click="handleLogout">Logout</button>
-
-        <h1>Choose a quiz</h1>
-        <!-- <button> Choose </button> -->
+                <h1> New Quiz</h1>
+                
+                <h1> Input Quiz Name</h1>
+                <input type="text" v-model="newQuiz">
+                <h1> Input Quiz Direction</h1>
+                <input type="text" v-model="quizDirection">
+                <button v-on:click.prevent="createQuiz"> Create Quiz</button>
+        <div v-for="quiz of quizzes">
+            <h1>{{quizzes.direction}}</h1>
+           <button>delete</button> <button> update</button>
+           
+        </div>
+        <button v-on:click="getQuizzes">Get</button>
+        <!-- 
+            <h1>Choose a quiz</h1>
+        <button> Choose </button> 
         <button v-on:click="getQuizzes">Get</button> <button v-on:click="postQuiz"> Post</button>
 
         <div><button> Partial Update(PATCH)</button></div>
 
         <div class="QuizOne">
-            <h1>{{quiz}} </h1>
+            <h1> </h1>
             <button v-on:click="deleteQuiz">Delete</button> <button v-on:click="updateQuiz">Update</button>
-        </div>
+        </div> 
+        -->
 
             </div>
         </div>
