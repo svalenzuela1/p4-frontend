@@ -13,7 +13,10 @@ const app = new Vue({
         token: null,
         quizzes: [],
         newQuiz: "",
-        quizDirection: ""
+        quizDirection: "",
+        updateQuizName: "",
+        updateQuizDirections: "",
+        questions: []
     }, 
     methods: {
         handleLogin: function(){
@@ -118,40 +121,60 @@ const app = new Vue({
                 this.getQuizzes()
             })
         }, 
-        // updateQuiz: function(){
-        //     const URL = this.prodURL ? this.prodURL : this.devURL
-        //     const id = event.target.id 
+        editQuiz: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const id = event.target.id 
+            const updated = {
+                name: this.updateQuizName,
+                directions: this.updateQuizDirections
+            }
 
-        //     fetch(`${URL}/quiz/quiz/${id}`, {
-        //         method: "PUT",
-        //         headers: {
-        //             Authorization: `JWT ${this.token}`
-        //         },
-        //         body: JSON.stringify()
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             console.log(data)
-        //         })
-        //     })
-        // }, 
-        // deleteQuiz: function(){
-        //     const URL = this.prodURL ? this.prodURL : this.devURL
-        //     const id = event.target.id 
-        //     fetch(`${URL}/quiz/quiz/${id}`,{
-        //         method: "DELETE", 
-        //         headers: {
-        //             Authorization: `JWT ${this.token}`
-        //         },
-        //         body: JSON.stringify()
+            fetch(`${URL}/quiz/quiz/${id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `JWT ${this.token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updated)
+            })
+            .then(response => {
+                this.getQuizzes() 
+            })
+        }, 
+        deleteQuiz: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const id = event.target.id 
 
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             console.log(data)
-        //         })
-        //     })
-        // }
+            fetch(`${URL}/quiz/quiz/${id}`,{
+                method: "DELETE", 
+                headers: {
+                    Authorization: `JWT ${this.token}`
+                },
+            })
+            .then(response =>{
+            
+                this.getQuizzes()
+
+            })
+        }, 
+        getQuestions: function(){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+
+        fetch(`${URL}/quiz/quiz/questions`, {
+                method: "GET",
+                headers:{
+                    Authorization: `JWT ${this.token}`
+                },
+                body: JSON.stringify()
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                console.log(data)
+                this.questions = data
+            })
+        }, 
     }
 })
 
-const URL = "https://localhost:8000"
 

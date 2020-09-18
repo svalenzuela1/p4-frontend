@@ -19,23 +19,34 @@
 <body>
     <div id="app">
         <div id="nologin" v-if="!loggedin">
-            <h1> This is the login area</h1>
+            <!-- <h1> </h1> -->
             <div id="loginform">
                 <!--Login-->
-                <fieldset> <legend>LOGIN</legend>
-                    <input type="text" placeholder="username" v-model="loginUN">
-                    <input type="password" placeholder="password" v-model="loginPW">
-                    <button v-on:click="handleLogin">login</button>
+                <div class="loginFieldset">
+                <fieldset class="fieldset1"> <legend>LOGIN</legend>
+                <div class="insideFieldset1">
+                    <input class="loginUN" type="text" placeholder="username" v-model="loginUN">
+                    <input class="loginPW" type="password" placeholder="password" v-model="loginPW">
+                    <button class="loginButton" v-on:click="handleLogin">login</button>
+                </div>
                 </fieldset>
+                </div>
 
                 <!--Create User-->
-                <fieldset> <legend>Create User</legend>
-                    <input type="text" placeholder="username" v-model="createUN">
-                    <input type="password" placeholder="password" v-model="createPW">
-                    
-                    <input type="text" placeholder="email">
+                <div class="createUserFieldset">
+                <fieldset class="fieldset2"> <legend>Create User</legend>
+
+                    <div class="insideFieldset2">
+                    <input class="createUN" type="text" placeholder="username" v-model="createUN">
+                    <input class="createPW" type="password" placeholder="password" v-model="createPW">
+                    <input class="createEmail" type="text" placeholder="email">
+
                     <button v-on:click="handleSignup">Create User</button>
+                     </div>
+
+                    
                 </fieldset>
+                </div>
             
             </div>
         </div>
@@ -50,9 +61,16 @@
                 <h1> Input Quiz Direction</h1>
                 <input type="text" v-model="quizDirection">
                 <button v-on:click.prevent="createQuiz"> Create Quiz</button>
+                <!-- UPDATE-->
+                <h1> Update Quiz </h1>
+                <input type="text" v-model="updateQuizName">
+                <input type="text" v-model="updateQuizDirections">
+                <button>v-on:click.prevent="editQuiz"> Update Quiz</button>
+                <!--DONE-->
         <div v-for="quiz of quizzes.results">
-            <h1>{{quiz.directions}}</h1>
-           <button>delete</button> <button> update</button>
+            <h1>{{quiz.name}}</h1>
+            <h3>{{quiz.directions}}</h3>
+           <button v-bind:id="quiz.id" v-on:click="deleteQuiz" >Delete Quiz</button> <button>Update Quiz</button>
            
         </div>
         <button v-on:click="getQuizzes">Get</button>
