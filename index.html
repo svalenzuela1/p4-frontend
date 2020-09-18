@@ -50,8 +50,8 @@
                 <h1> Input Quiz Direction</h1>
                 <input type="text" v-model="quizDirection">
                 <button v-on:click.prevent="createQuiz"> Create Quiz</button>
-        <div v-for="quiz of quizzes">
-            <h1>{{quizzes.direction}}</h1>
+        <div v-for="quiz of quizzes.results">
+            <h1>{{quiz.directions}}</h1>
            <button>delete</button> <button> update</button>
            
         </div>

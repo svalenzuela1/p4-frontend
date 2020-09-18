@@ -94,8 +94,10 @@ const app = new Vue({
             })
             .then(response => response.json())
             .then(data => {
-                
+
+                console.log(data)
                 this.quizzes = data
+                
             })
         }, 
         createQuiz: function(){
