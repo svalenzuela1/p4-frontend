@@ -51,27 +51,60 @@
             </div>
         </div>
         <div id="login"  v-if="loggedin">
-        <h1> This is the user area</h1>
+        <!-- <h1> This is the user area</h1> -->
             <div class="dashboard">
-        <button v-on:click="handleLogout">Logout</button>
+                <div class="logoutDiv">
+        <button class="logoutButton" v-on:click="handleLogout">Logout</button>
+                </div>
+                <div class="contentDiv">
                 <h1> New Quiz</h1>
-                
-                <h1> Input Quiz Name</h1>
-                <input type="text" v-model="newQuiz">
+                        
+                    <div>
+                <h1> Quiz Name</h1>
+                <input placeholder="Quiz Name ? ........." type="text" v-model="newQuiz">
+                    </div>
+
+                    <div>
                 <h1> Input Quiz Direction</h1>
-                <input type="text" v-model="quizDirection">
+                <input placeholder="Directions For Quiz? ............" type="text" v-model="quizDirection">
                 <button v-on:click.prevent="createQuiz"> Create Quiz</button>
+                    </div>
+
                 <!-- UPDATE-->
+                    <div>
                 <h1> Update Quiz </h1>
-                <input type="text" v-model="updateQuizName">
-                <input type="text" v-model="updateQuizDirections">
-                <button>v-on:click.prevent="editQuiz"> Update Quiz</button>
+                <input placeholder="Update Quiz Name" type="text" v-model="updateQuizName">
+                <input placeholder="Update Quiz Direction" type="text" v-model="updateQuizDirections">
+                <button v-on:click.prevent="editQuiz"> Update Quiz</button>
+                    </div>
                 <!--DONE-->
-        <div v-for="quiz of quizzes.results">
+        <div class="quizzes" v-for="(quiz,index) of quizzes.results" >
             <h1>{{quiz.name}}</h1>
             <h3>{{quiz.directions}}</h3>
+
+            <button v-bind:id="index" v-on:click="chooseQuiz"> Take Quiz</button>
+
+            <!-- <h5>{{}}</h5>
+            
+            <div v-bind:id="quiz.id" v-for="question of questions.results[index]" v-if="questions.length > 0">
+
+
+                
+                <h5> {{question.question}}</h5>
+            </div> -->
+            <!--QUESTIONS DIV-->
            <button v-bind:id="quiz.id" v-on:click="deleteQuiz" >Delete Quiz</button> <button>Update Quiz</button>
-           
+                </div>
+
+                <div> 
+                    <div v-for="q of currentQuiz"> 
+
+                        <!-- <h5> {{q.question}}</h5> -->
+
+                    </div>
+                </div>
+
+
         </div>
         <button v-on:click="getQuizzes">Get</button>
         <!-- 

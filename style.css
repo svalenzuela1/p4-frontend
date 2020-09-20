@@ -1,6 +1,29 @@
 html{
     background-color: azure ;
 }
+
+.logoutDiv {
+    display: flex; 
+    align-self: flex-end;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.logoutButton {
+    border: none;
+    background-color: inherit;
+    padding: 14px 28px;
+    font-size: 30px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .2s ease-in-out;
+}
+
+.logoutButton:hover {
+    background: #eee;
+    transform: scale(1.1);
+}
+
 .fieldset1 {
     border: solid black 5px;
     height: 150px;
@@ -77,3 +100,8 @@ html{
     width: 200px;
     margin-bottom: 10px;
 }
+
+
+/* Temporary DashBoard */
+
+/* End of Temporary Dashboard */

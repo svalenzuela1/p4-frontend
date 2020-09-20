@@ -16,9 +16,43 @@ const app = new Vue({
         quizDirection: "",
         updateQuizName: "",
         updateQuizDirections: "",
-        questions: []
+        questions: [],
+        currentQuiz: []
     }, 
+    computed: { 
+        q: function(){
+            if(this.quizzes.results){
+            return this.quizzes.results.map((quiz,index) => {
+                return {
+                    quiz: this.quizzes.results[index],
+                    questions: this.questions.results[index]
+                }
+            }) } else {
+               return []
+            }
+        }
+    },
     methods: {
+        chooseQuiz: function(event){
+            const id = event.target.id 
+            this.currentQuiz = this.questions.results[id]
+
+            // fetch(`${URL}/quiz/questions/{id}/`, {
+            //     method: "GET",
+            //     headers:{
+            //         Authorization: `JWT ${this.token}`
+            //     },
+            //     body: JSON.stringify()
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+
+            //     console.log(data)
+            //     // this.q = data
+                
+            // })
+        },
+
         handleLogin: function(){
             const URL = this.prodURL ? this.prodURL : this.devURL
             console.log(URL)
@@ -44,7 +78,11 @@ const app = new Vue({
                 this.token = data.token
                 this.loggedin = true 
                 this.getQuizzes()
+                this.getQuestions()
 
+
+
+            
                 //UNCOMMENT WHEN ADDING FINISHING TOUCHES
                 this.loginUN = ""
                 this.loginPW = ""
@@ -126,7 +164,7 @@ const app = new Vue({
             const id = event.target.id 
             const updated = {
                 name: this.updateQuizName,
-                directions: this.updateQuizDirections
+                directions: this.updateQuizDirections,
             }
 
             fetch(`${URL}/quiz/quiz/${id}`, {
@@ -160,7 +198,7 @@ const app = new Vue({
         getQuestions: function(){
             const URL = this.prodURL ? this.prodURL : this.devURL
 
-        fetch(`${URL}/quiz/quiz/questions`, {
+        fetch(`${URL}/quiz/questions/`, {
                 method: "GET",
                 headers:{
                     Authorization: `JWT ${this.token}`
@@ -176,5 +214,4 @@ const app = new Vue({
         }, 
     }
 })
-
 
