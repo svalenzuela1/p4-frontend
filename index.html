@@ -147,12 +147,24 @@
 
             <div v-if="modifyQuestions && !onDashboard">
                 <div class="logoutDiv">
+                <button class="modifyQuestionsButton" v-on:click="backToDashboard"> Edit Quiz </button>
                 <button class="takeQuizButton"> Take Quiz</button>
-        <button v-on:click=""> Edit Quiz </button>
-        <button class="logoutButton" v-on:click="handleLogout">Logout</button>
+                <button class="logoutButton" v-on:click="handleLogout">Logout</button>
                 </div>
                 <h1>modify Questions area</h1>
                 <h2> User Area</h2>
+
+                <!-- <div v-for="quiz of quizzes.results"> -->
+                    <div v-for="question of questions.results">
+                        <h2>{{question.quiz}}</h2>
+                        <h3>{{question.question}}</h3>
+                        <h4>{{question.choice_one}}</h4>
+                        <h4>{{question.choice_two}}</h4>
+                        <h4>{{question.choice_three}}</h4>
+                        <h4>{{question.choice_four}}</h4>
+                    </div> 
+                    
+                <!-- </div> -->
             </div>
 
         </div>

@@ -19,7 +19,12 @@ const app = new Vue({
         questions: [],
         currentQuiz: [],
         modifyQuestions: false,
-        onDashboard: false
+        onDashboard: false,
+        quizQuestion: "",
+        quizChoiceOne: "",
+        quizChoiceTwo: "",
+        quizChoiceThree: "",
+        quizChoiceFour: ""
     }, 
     // computed: { 
     //     q: function(){
@@ -228,22 +233,7 @@ const app = new Vue({
                 console.log(data)
                 this.questions = data
             })
-        }
-        //, 
-        // editSelectQuiz: function(event){
-        //     this.editID = event.target.id 
-        //    console.log(event.target.id)
-
-        //     const QuizName = this.quizzes.find((quiz) => {
-
-        //    return quiz.id === this.editID
-        
-        // })
-            
-            //console.log(QuizName)
-            // const QuizDirection = this.quizzes.find((quiz) => quiz.id === this.editID).quiz
-            // console.log(QuizName, QuizDirection)
-        //}
+        },
     }
 })
 
