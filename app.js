@@ -50,6 +50,36 @@ const app = new Vue({
     //     }
     // },
     methods: {
+        hamburger: function(){
+    const $hamburger = $(".burger")
+    const $Links = $(".link")
+    let show = false;
+
+    const showMenu = (event) => {
+        if (show) {
+            $Links.each(function(index){
+            $(this).css("display","none")
+        })
+        show = false
+    } else {
+        $Links.each(function(index){
+            $(this).css("display","block")
+        })
+        show = true
+    }
+}
+
+// $hamburger.on("click", showMenu)
+
+         },
+        selector: function(){
+            $("h4").toggle(
+                function(){$("h4").css({"color": "red"});},
+                function(){$("h4").css({"color": "blue"});},
+                function(){$("h4").css({"color": "green"});
+              });
+              
+        },
         takeQuizPage: function(){
             this.modifyQuestions = false
             this.onDashboard = false 
@@ -129,6 +159,7 @@ const app = new Vue({
             this.loggedin=false
             this.user=null
             this.token=null
+            this.takeQuizPage=false
         },
         handleSignup: function(){
             const URL = this.prodURL ? this.prodURL : this.devURL
@@ -291,10 +322,10 @@ const app = new Vue({
                 quiz: this.updatedQuizID,
                 order: this.updatedquestionOrder, 
                 question: this.updatedQuizQuestion,
-                ChoiceOne: this.updatedQuizChoiceOne,
-                ChoiceTwo: this.updatedQuizChoiceTwo,
-                ChoiceThree: this.updatedQuizChoiceThree,
-                ChoiceFour: this.updatedQuizChoiceFour
+                choice_one: this.updatedQuizChoiceOne,
+                choice_two: this.updatedQuizChoiceTwo,
+                choice_three: this.updatedQuizChoiceThree,
+                choice_four: this.updatedQuizChoiceFour
             }
 
             fetch(`${URL}/quiz/questions/${id}/`, {
@@ -306,6 +337,8 @@ const app = new Vue({
                 body: JSON.stringify(updated)
             })
             .then(response => {
+                this.updatedQuizID,
+                this.updatedQuestionOrder,
                 this.updatedQuizQuestion,
                 this.updatedQuizChoiceOne,
                 this.updatedQuizChoiceTwo,
@@ -330,38 +363,67 @@ const app = new Vue({
                 this.getQuestions()
 
             })
-        },
-        partialUpdate: function(event){
-            const URL = this.prodURL ? this.prodURL : this.devURL
-            const id = event.target.id 
-            const updated = { 
-                quiz: this.updatedQuizID,
-                order: this.updatedquestionOrder, 
-                question: this.updatedQuizQuestion,
-                choice_one: this.updatedQuizChoiceOne,
-                choice_two: this.updatedQuizChoiceTwo,
-                choice_three: this.updatedQuizChoiceThree,
-                choiceour: this.updatedQuizChoiceFour
-            }
+         }
+         //,
+        // partialQuestionUpdate: function(event){
+        //     const URL = this.prodURL ? this.prodURL : this.devURL
+        //     const id = event.target.id 
+        //     const updated = { 
+        //         quiz: this.updatedQuizID,
+        //         order: this.updatedquestionOrder, 
+        //         question: this.updatedQuizQuestion,
+        //         choice_one: this.updatedQuizChoiceOne,
+        //         choice_two: this.updatedQuizChoiceTwo,
+        //         choice_three: this.updatedQuizChoiceThree,
+        //         choice_four: this.updatedQuizChoiceFour
+        //     }
 
-            fetch(`${URL}/quiz/questions/${id}/`, {
-                method: "PATCH",
-                headers: {
-                    Authorization: `JWT ${this.token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(updated)
-            })
-            .then(response => {
-                this.updatedQuizQuestion,
-                this.updatedQuizChoiceOne,
-                this.updatedQuizChoiceTwo,
-                this.updatedQuizChoiceThree,
-                this.updatedQuizChoiceFour
-                this.getQuestions() 
-                alert("Quiz Has Been Updated")
-            })
-        },
+        //     fetch(`${URL}/quiz/questions/${id}/`, {
+        //         method: "PATCH",
+        //         headers: {
+        //             Authorization: `JWT ${this.token}`,
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify(updated)
+        //     })
+        //     .then(response => {
+        //         this.updatedQuizQuestion,
+        //         this.updatedQuizChoiceOne,
+        //         this.updatedQuizChoiceTwo,
+        //         this.updatedQuizChoiceThree,
+        //         this.updatedQuizChoiceFour
+        //         this.getQuestions() 
+        //         alert("Quiz Has Been Partially Updated")
+        //     })
+        // },
+        // partialQuizUpdate: function(event){
+        //     const URL = this.prodURL ? this.prodURL : this.devURL
+        //     const id = event.target.id 
+        //     const updated = {
+        //         name: this.updateQuizName,
+        //         directions: this.updateQuizDirections,
+        //     }
+
+        //     fetch(`${URL}/quiz/quiz/${id}/`, {
+        //         method: "PATCH",
+        //         headers: {
+        //             Authorization: `JWT ${this.token}`,
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify(updated)
+        //     })
+        //     .then(response => {
+        //         if(this.updateQuizName){
+        //         this.updateQuizName = ""
+        //         this.getQuizzes() 
+        //         alert("Quiz Has Been Updated")
+        //         } else if(this.updateQuizDirections){
+        //         this.updateQuizDirections = ""
+        //         this.getQuizzes() 
+        //         alert("Quiz Has Been Updated")
+        //         }
+        //     })
+        // }
+        
     }
 })
-

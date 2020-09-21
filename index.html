@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <!--Vue-->
 <!-- <link href="https://cdn.jsdelivr.net/npm/vuetify@1.2.2/dist/vuetify.min.css" rel="stylesheet" />  -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -27,7 +28,7 @@
                 <div class="insideFieldset1">
                     <input class="loginUN" type="text" placeholder="username" v-model="loginUN">
                     <input class="loginPW" type="password" placeholder="password" v-model="loginPW">
-                    <button class="loginButton" v-on:click="handleLogin">login</button>
+                    <button class="button6" style="background-color:#668fff" v-on:click="handleLogin">login</button>
                 </div>
                 </fieldset>
                 </div>
@@ -41,7 +42,7 @@
                     <input class="createPW" type="password" placeholder="password" v-model="createPW">
                     <input class="createEmail" type="text" placeholder="email">
 
-                    <button v-on:click="handleSignup">Create User</button>
+                    <button v-on:click="handleSignup" class="button6" style="background-color:#668fff">Create User</button>
                      </div>
 
                     
@@ -52,16 +53,22 @@
         </div>
         <div id="login"  v-if="loggedin && !modifyQuestions && !onTakeQuiz" >
         <!-- <h1> This is the user area</h1> -->
-            <div class="dashboard" >
+
+        <div class="dashboard" >
+
+                <nav>
                 <div class="logoutDiv">
+                <!-- <div class="burger" class="logoutButton">☰</div> -->
         
-        <button class="modifyQuestionsButton" v-on:click="onModifyQuestions">Edit Questions</button>
+       <div class="link"> <button class="takeQuizButton" v-on:click="onModifyQuestions">Edit Questions</button></div>
 
-        <button class="takeQuizButton" v-on:click="takeQuizPage"> Take Quiz</button>
+       <div class="link"> <button class="takeQuizButton" v-on:click="takeQuizPage"> Take Quiz</button> </div>
 
-        <button class="logoutButton" v-on:click="handleLogout">Logout</button>
+       <div class="link"> <button class="logoutButton" v-on:click="handleLogout">Logout</button> </div> 
         
                 </div>
+                </nav>
+
                 <div class="contentDiv">
                 
                     <h1 id="newQuizHeader"> New Quiz</h1>
@@ -84,7 +91,6 @@
                 <input class="updateQuizNameInput" placeholder="Update Quiz Name" type="text" v-model="updateQuizName">
                 <input class="updateQuizDirectionsInput" placeholder="Update Quiz Direction" type="text" v-model="updateQuizDirections">
                 <button class="updateQuizButton" v-bind:id="quiz.id" v-on:click.prevent="editQuiz" > Update Quiz</button>
-
                 <div class="quizzesDiv">
                 <h2>ID: {{quiz.id}}</h2>
                 <h2>NAME : {{quiz.name}}</h2>
@@ -148,7 +154,7 @@
 
             <div v-if="modifyQuestions && !onDashboard && !onTakeQuiz">
                 <div class="logoutDiv">
-                <button class="modifyQuestionsButton" v-on:click="backToDashboard"> Edit Quiz </button>
+                <button class="takeQuizButton" v-on:click="backToDashboard"> Edit Quiz </button>
                 <button class="takeQuizButton" v-on:click="takeQuizPage"> Take Quiz</button>
                 <button class="logoutButton" v-on:click="handleLogout">Logout</button>
                 </div>
@@ -167,6 +173,9 @@
                     <button class="createQuizButton" v-on:click.prevent="createQuestion"> Create Question</button>
 
                 </div>
+
+                
+                
                 <!-- <div v-for="quiz of quizzes.results"> -->
                     <div class="questionsDiv" v-for="question of questions.results">
                         <h2>QUIZ ID: {{question.quiz}}</h2>
@@ -176,34 +185,40 @@
                         <h4>3. {{question.choice_three}}</h4>
                         <h4>4. {{question.choice_four}}</h4>
                         <button v-bind:id="question.id" class="deleteQuizButton" v-on:click="deleteQuestion"> Delete Question</button>
+                            <h4> OR </h4>
 
-                    </div> 
-                    
+                            <div class="updateQuizChildDiv">
+                                <button class="updateQuizButton" v-bind:id="question.id" v-on:click.prevent="editQuestion"> Update Quiz</button>
+
+                                <input class="updateQuizDirectionsInput" placeholder="Update Quiz ID" type="number" v-model="updatedQuizID">
+                                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Order" type="number" v-model="updatedQuestionOrder">
+                                <input class="updateQuizNameInput" placeholder="Update Question" type="text" v-model="updatedQuizQuestion">
+                                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Choice One" type="text" v-model="updatedQuizChoiceOne">
+                                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Choice Two" type="text" v-model="updatedQuizChoiceTwo">
+                                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Choice Three" type="text" v-model="updatedQuizChoiceThree">
+                                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Choice Four" type="text" v-model="updatedQuizChoiceFour">
+                            
+                            </div> 
+                        </div>
                 <!-- </div> -->
             </div>
 
             <div v-if="onTakeQuiz && !modifyQuestions && !onDashboard">
                 <div class="logoutDiv">
 
-                    <button class="modifyQuestionsButton" v-on:click="backToDashboard"> Edit Quiz </button>
-                    <button class="modifyQuestionsButton" v-on:click="onModifyQuestions">Edit Questions</button>
+                    <button class="takeQuizButton" v-on:click="backToDashboard"> Edit Quiz </button>
+                    <button class="takeQuizButton" v-on:click="onModifyQuestions">Edit Questions</button>
                     <button class="logoutButton" v-on:click="handleLogout">Logout</button>
 
                 </div>
 
                 <div class="actualQuiz" v-for="question of questions.results">
                     <div class="question"><h2>{{question.order}}.{{question.question}}</h2></div>
-                    <div class="choice_one"><h4>a.){{question.choice_one}}</h4></div>
+                    <div class="choice_one" v-on:click="selector"><h4>a.){{question.choice_one}}</h4></div>
                     <div class=:choice_two><h4>b.){{question.choice_two}}</h4></div>
                     <div class="choice_three"><h4>c.){{question.choice_three}}</h4></div>
                     <div class="choice_four"><h4>d.){{question.choice_four}}</h4></div>
                 </div>
-
-                <!-- <div class="updateQuizChildDiv">
-                <input class="updateQuizNameInput" placeholder="Update Quiz Name" type="text" v-model="updateQuizName">
-                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Direction" type="text" v-model="updateQuizDirections">
-                <button class="updateQuizButton" v-bind:id="quiz.id" v-on:click.prevent="editQuiz" > Update Quiz</button>
-            </div> -->
         </div>
        
 
