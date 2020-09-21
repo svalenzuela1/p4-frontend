@@ -191,7 +191,7 @@ body{
     transition: all .2s ease-in-out;
 }
 
-.updateQuizButton:hover, .deleteQuizButton:hover, .modifyQuestionsButton:hover{
+.updateQuizButton:hover, .deleteQuizButton:hover, .modifyQuestionsButton{
     background: #eee;
     transform: scale(1.1);
 }
@@ -201,6 +201,11 @@ body{
     border: solid black 1px;
     padding: 50px;
     margin: 20px;
+    background-color: white;
+}
+
+.questionsDiv{
+    border: solid black 1px;
     background-color: white;
 }
 /* End of Dashboard */

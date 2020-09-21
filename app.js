@@ -20,11 +20,20 @@ const app = new Vue({
         currentQuiz: [],
         modifyQuestions: false,
         onDashboard: false,
+        QuizID: 0,
+        questionOrder: 0,
         quizQuestion: "",
         quizChoiceOne: "",
         quizChoiceTwo: "",
         quizChoiceThree: "",
-        quizChoiceFour: ""
+        quizChoiceFour: "", 
+        updatedQuizQuestion: "",
+        updatedQuizChoiceOne: "",
+        updatedQuizChoiceTwo: "",
+        updatedQuizChoiceThree: "",
+        updatedQuizChoiceFour: "",
+        updatedQuizID: 0,
+        updatedQuestion: 0
     }, 
     // computed: { 
     //     q: function(){
@@ -232,6 +241,85 @@ const app = new Vue({
 
                 console.log(data)
                 this.questions = data
+            })
+        },
+        createQuestion: function(){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+
+            const question = { 
+                quizID: this.QuizID,
+                question: this.quizQuestion,
+                ChoiceOne: this.quizChoiceOne,
+                ChoiceTwo: this.quizChoiceTwo,
+                ChoiceThree: this.quizChoiceThree,
+                ChoiceFour: this.quizChoiceFour
+            }
+
+            fetch(`${URL}/quiz/questions/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `JWT ${this.token}`
+                }, 
+                body: JSON.stringify(question)
+            })
+            .then(response => {
+                this.QuizID = 0
+                this.questionOrder = 0
+                this.quizQuestion = "",
+                this.quizChoiceOne = "",
+                this.quizChoiceTwo = "",
+                this.quizChoiceThree = "",
+                this.quizChoiceFour = ""
+                this.getQuestions()
+                alert("New Question Has Been Created")
+            })
+        }, 
+        editQuestion: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const id = event.target.id 
+            const updated = { 
+                quizID: this.QuizID,
+
+                question: this.updatedQuizQuestion,
+                ChoiceOne: this.updatedQuizChoiceOne,
+                ChoiceTwo: this.updatedQuizChoiceTwo,
+                ChoiceThree: this.updatedQuizChoiceThree,
+                ChoiceFour: this.updatedQuizChoiceFour
+            }
+
+            fetch(`${URL}/quiz/questions/${id}/`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `JWT ${this.token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updated)
+            })
+            .then(response => {
+                this.updatedQuizQuestion,
+                this.updatedQuizChoiceOne,
+                this.updatedQuizChoiceTwo,
+                this.updatedQuizChoiceThree,
+                this.updatedQuizChoiceFour
+                this.getQuestions() 
+                alert("Quiz Has Been Updated")
+            })
+        }, 
+        deleteQuestion: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const id = event.target.id 
+
+            fetch(`${URL}/quiz/questions/${id}`,{
+                method: "DELETE", 
+                headers: {
+                    Authorization: `JWT ${this.token}`
+                },
+            })
+            .then(response =>{
+            
+                this.getQuestions()
+
             })
         },
     }

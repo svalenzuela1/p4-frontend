@@ -86,6 +86,7 @@
                 <button class="updateQuizButton" v-bind:id="quiz.id" v-on:click.prevent="editQuiz" > Update Quiz</button>
 
                 <div class="quizzesDiv">
+                <h2>ID: {{quiz.id}}</h2>
                 <h2>NAME : {{quiz.name}}</h2>
                 <h2>DIRECTIONS : {{quiz.directions}}</h2>
                     </div>
@@ -151,17 +152,31 @@
                 <button class="takeQuizButton"> Take Quiz</button>
                 <button class="logoutButton" v-on:click="handleLogout">Logout</button>
                 </div>
-                <h1>modify Questions area</h1>
-                <h2> User Area</h2>
+                <h1>Create Questions</h1>
+                <div class="newQuiz">
+                    <!--Gotta input ID for Quiz Input-->
+                    <input class="quizNameInput" placeholder="Enter Quiz ID" type="number" v-model="questionOrder">
+                    <input class="quizNameInput" placeholder="Enter Quiz ID" type="number" v-model="QuizID">
+                    <input class="quizNameInput" placeholder="Question" type="text" v-model="quizQuestion">
+    
+                    <input class="quizDirectionsInput" placeholder="Choice One" type="text" v-model="quizChoiceOne">
+                    <input class="quizDirectionsInput" placeholder="Choice Two" type="text" v-model="quizChoiceTwo">
+                    <input class="quizDirectionsInput" placeholder="Choice Three" type="text" v-model="quizChoiceThree">
+                    <input class="quizDirectionsInput" placeholder="Choice Four" type="text" v-model="quizChoiceFour">
 
+                    <button class="createQuizButton" v-on:click.prevent="createQuestion"> Create Question</button>
+
+                </div>
                 <!-- <div v-for="quiz of quizzes.results"> -->
-                    <div v-for="question of questions.results">
-                        <h2>{{question.quiz}}</h2>
-                        <h3>{{question.question}}</h3>
-                        <h4>{{question.choice_one}}</h4>
-                        <h4>{{question.choice_two}}</h4>
-                        <h4>{{question.choice_three}}</h4>
-                        <h4>{{question.choice_four}}</h4>
+                    <div class="questionsDiv" v-for="question of questions.results">
+                        <h2>QUIZ ID: {{question.quiz}}</h2>
+                        <h3>Question: {{question.question}}</h3>
+                        <h4>1. {{question.choice_one}}</h4>
+                        <h4>2. {{question.choice_two}}</h4>
+                        <h4>3. {{question.choice_three}}</h4>
+                        <h4>4. {{question.choice_four}}</h4>
+                        <button v-bind:id="question.id" class="deleteQuizButton" v-on:click="deleteQuestion"> Delete Question</button>
+
                     </div> 
                     
                 <!-- </div> -->
