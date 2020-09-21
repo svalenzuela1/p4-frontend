@@ -1,7 +1,7 @@
 const app = new Vue({
     el: "#app",
     data: {
-        loggedin: false, 
+        loggedin: true, 
         JWT: "",
         loginUN: "",
         loginPW: "",

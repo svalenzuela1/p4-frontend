@@ -2,14 +2,20 @@ html{
     background-color: azure ;
 }
 
+body{
+    text-align: center;
+}
 .logoutDiv {
     display: flex; 
+    flex-direction: row;
     align-self: flex-end;
     justify-content: flex-end;
     align-items: flex-end;
+
 }
 
-.logoutButton {
+/* LOGOUT DIV */
+.logoutButton, .takeQuizButton {
     border: none;
     background-color: inherit;
     padding: 14px 28px;
@@ -19,11 +25,13 @@ html{
     transition: all .2s ease-in-out;
 }
 
-.logoutButton:hover {
+.logoutButton:hover, .takeQuizButton:hover {
     background: #eee;
     transform: scale(1.1);
 }
 
+
+/*  END OF LOGOUT DIV*/
 .fieldset1 {
     border: solid black 5px;
     height: 150px;
@@ -102,6 +110,50 @@ html{
 }
 
 
-/* Temporary DashBoard */
+/*  DashBoard */
 
-/* End of Temporary Dashboard */
+#newQuizHeader {
+    text-align: center;
+}
+
+.quizNameInput {
+    height: 100px;
+    width: 250px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.quizDirectionsInput {
+    text-align: center;
+    height: 100px;
+    width: 400px;
+}
+
+.moveQuizButton{
+    display: flex;
+    align-items: center;
+}
+
+.createQuizButton {
+    text-align: center;
+    margin-top: 50px;
+    border: none;
+    background-color: inherit;
+    padding: 14px 28px;
+    font-size: 30px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .2s ease-in-out;
+}
+
+.createQuizButton:hover {
+    background: #eee;
+    transform: scale(1.1);
+}
+
+.newQuiz {
+    display: flex; 
+   align-items: center;
+   flex-direction: column;
+}
+/* End of Dashboard */
