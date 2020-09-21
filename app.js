@@ -17,7 +17,9 @@ const app = new Vue({
         updateQuizName: "",
         updateQuizDirections: "",
         questions: [],
-        currentQuiz: []
+        currentQuiz: [],
+        modifyQuestions: false,
+        onDashboard: false
     }, 
     // computed: { 
     //     q: function(){
@@ -33,6 +35,16 @@ const app = new Vue({
     //     }
     // },
     methods: {
+        backToDashboard: function(){
+            this.onDashboard = true 
+            this.modifyQuestions = false
+        },
+        onModifyQuestions: function(){
+            this.modifyQuestions = true
+            this.onDashboard = false
+            this.getQuestions()
+            
+        },
         chooseQuiz: function(event){
             const id = event.target.id 
             this.currentQuiz = this.questions.results[id]
@@ -77,6 +89,7 @@ const app = new Vue({
                 this.user = data.user
                 this.token = data.token
                 this.loggedin = true 
+                this.dashboard = true
                 this.getQuizzes()
                 this.getQuestions()
 

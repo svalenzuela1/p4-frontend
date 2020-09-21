@@ -179,7 +179,7 @@ body{
     width: 250px;
 }
 
-.updateQuizButton, .deleteQuizButton {
+.updateQuizButton, .deleteQuizButton, .modifyQuestionsButton {
     text-align: center;
     margin-top: 20px;
     border: none;
@@ -191,7 +191,7 @@ body{
     transition: all .2s ease-in-out;
 }
 
-.updateQuizButton:hover, .deleteQuizButton:hover{
+.updateQuizButton:hover, .deleteQuizButton:hover, .modifyQuestionsButton:hover{
     background: #eee;
     transform: scale(1.1);
 }

@@ -50,10 +50,13 @@
             
             </div>
         </div>
-        <div id="login"  v-if="loggedin">
+        <div id="login"  v-if="loggedin && !modifyQuestions" >
         <!-- <h1> This is the user area</h1> -->
-            <div class="dashboard">
+            <div class="dashboard" >
                 <div class="logoutDiv">
+        
+        <button class="modifyQuestionsButton" v-on:click="onModifyQuestions">Edit Questions</button>
+
         <button class="takeQuizButton"> Take Quiz</button>
 
         <button class="logoutButton" v-on:click="handleLogout">Logout</button>
@@ -89,12 +92,13 @@
                 <!-- <button v-bind:id="editID" v-on:click="editSelectQuiz">Update Select Quiz</button> -->
                 <h6>OR</h6>
                 <button v-bind:id="quiz.id" class="deleteQuizButton" v-on:click="deleteQuiz"> Delete Quiz</button>
-                <!--
-                    THIS GOES IN DELETE QUIZ BUTTON
-                    v-bind:id="quiz.id"-->
+               
+            
                         </div> 
                     </div>
                     </div>
+
+                    
                 <!--DONE-->
         <!-- <div class="quizzes" v-for="(quiz,index) of quizzes.results" >
             <h1>{{quiz.name}}</h1>
@@ -137,8 +141,20 @@
             <button v-on:click="deleteQuiz">Delete</button> <button v-on:click="updateQuiz">Update</button>
         </div> 
         -->
+        
 
             </div>
+
+            <div v-if="modifyQuestions && !onDashboard">
+                <div class="logoutDiv">
+                <button class="takeQuizButton"> Take Quiz</button>
+        <button v-on:click=""> Edit Quiz </button>
+        <button class="logoutButton" v-on:click="handleLogout">Logout</button>
+                </div>
+                <h1>modify Questions area</h1>
+                <h2> User Area</h2>
+            </div>
+
         </div>
        
 
