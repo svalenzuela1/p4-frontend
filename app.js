@@ -330,7 +330,38 @@ const app = new Vue({
                 this.getQuestions()
 
             })
-        }
+        },
+        partialUpdate: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const id = event.target.id 
+            const updated = { 
+                quiz: this.updatedQuizID,
+                order: this.updatedquestionOrder, 
+                question: this.updatedQuizQuestion,
+                choice_one: this.updatedQuizChoiceOne,
+                choice_two: this.updatedQuizChoiceTwo,
+                choice_three: this.updatedQuizChoiceThree,
+                choiceour: this.updatedQuizChoiceFour
+            }
+
+            fetch(`${URL}/quiz/questions/${id}/`, {
+                method: "PATCH",
+                headers: {
+                    Authorization: `JWT ${this.token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updated)
+            })
+            .then(response => {
+                this.updatedQuizQuestion,
+                this.updatedQuizChoiceOne,
+                this.updatedQuizChoiceTwo,
+                this.updatedQuizChoiceThree,
+                this.updatedQuizChoiceFour
+                this.getQuestions() 
+                alert("Quiz Has Been Updated")
+            })
+        },
     }
 })
 
