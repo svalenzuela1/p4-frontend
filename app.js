@@ -20,6 +20,7 @@ const app = new Vue({
         currentQuiz: [],
         modifyQuestions: false,
         onDashboard: false,
+        onTakeQuiz: false,
         QuizID: 0,
         questionOrder: 0,
         quizQuestion: "",
@@ -33,7 +34,7 @@ const app = new Vue({
         updatedQuizChoiceThree: "",
         updatedQuizChoiceFour: "",
         updatedQuizID: 0,
-        updatedQuestion: 0
+        updatedQuestionOrder: 0
     }, 
     // computed: { 
     //     q: function(){
@@ -49,13 +50,20 @@ const app = new Vue({
     //     }
     // },
     methods: {
+        takeQuizPage: function(){
+            this.modifyQuestions = false
+            this.onDashboard = false 
+            this.onTakeQuiz = true
+        },
         backToDashboard: function(){
             this.onDashboard = true 
             this.modifyQuestions = false
+            this.onTakeQuiz = false
         },
         onModifyQuestions: function(){
             this.modifyQuestions = true
             this.onDashboard = false
+            this.onTakeQuiz = false 
             this.getQuestions()
             
         },
@@ -247,12 +255,13 @@ const app = new Vue({
             const URL = this.prodURL ? this.prodURL : this.devURL
 
             const question = { 
-                quizID: this.QuizID,
+                quiz: this.QuizID,
+                order: this.questionOrder,
                 question: this.quizQuestion,
-                ChoiceOne: this.quizChoiceOne,
-                ChoiceTwo: this.quizChoiceTwo,
-                ChoiceThree: this.quizChoiceThree,
-                ChoiceFour: this.quizChoiceFour
+                choice_one: this.quizChoiceOne,
+                choice_two: this.quizChoiceTwo,
+                choice_three: this.quizChoiceThree,
+                choice_four: this.quizChoiceFour
             }
 
             fetch(`${URL}/quiz/questions/`, {
@@ -264,8 +273,8 @@ const app = new Vue({
                 body: JSON.stringify(question)
             })
             .then(response => {
-                this.QuizID = 0
-                this.questionOrder = 0
+                this.QuizID = 0,
+                this.questionOrder = 0,
                 this.quizQuestion = "",
                 this.quizChoiceOne = "",
                 this.quizChoiceTwo = "",
@@ -279,8 +288,8 @@ const app = new Vue({
             const URL = this.prodURL ? this.prodURL : this.devURL
             const id = event.target.id 
             const updated = { 
-                quizID: this.QuizID,
-
+                quiz: this.updatedQuizID,
+                order: this.updatedquestionOrder, 
                 question: this.updatedQuizQuestion,
                 ChoiceOne: this.updatedQuizChoiceOne,
                 ChoiceTwo: this.updatedQuizChoiceTwo,
@@ -314,14 +323,14 @@ const app = new Vue({
                 method: "DELETE", 
                 headers: {
                     Authorization: `JWT ${this.token}`
-                },
+                }
             })
             .then(response =>{
             
                 this.getQuestions()
 
             })
-        },
+        }
     }
 })
 

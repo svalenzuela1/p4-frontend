@@ -50,14 +50,14 @@
             
             </div>
         </div>
-        <div id="login"  v-if="loggedin && !modifyQuestions" >
+        <div id="login"  v-if="loggedin && !modifyQuestions && !onTakeQuiz" >
         <!-- <h1> This is the user area</h1> -->
             <div class="dashboard" >
                 <div class="logoutDiv">
         
         <button class="modifyQuestionsButton" v-on:click="onModifyQuestions">Edit Questions</button>
 
-        <button class="takeQuizButton"> Take Quiz</button>
+        <button class="takeQuizButton" v-on:click="takeQuizPage"> Take Quiz</button>
 
         <button class="logoutButton" v-on:click="handleLogout">Logout</button>
         
@@ -146,17 +146,17 @@
 
             </div>
 
-            <div v-if="modifyQuestions && !onDashboard">
+            <div v-if="modifyQuestions && !onDashboard && !onTakeQuiz">
                 <div class="logoutDiv">
                 <button class="modifyQuestionsButton" v-on:click="backToDashboard"> Edit Quiz </button>
-                <button class="takeQuizButton"> Take Quiz</button>
+                <button class="takeQuizButton" v-on:click="takeQuizPage"> Take Quiz</button>
                 <button class="logoutButton" v-on:click="handleLogout">Logout</button>
                 </div>
                 <h1>Create Questions</h1>
                 <div class="newQuiz">
                     <!--Gotta input ID for Quiz Input-->
-                    <input class="quizNameInput" placeholder="Enter Quiz ID" type="number" v-model="questionOrder">
                     <input class="quizNameInput" placeholder="Enter Quiz ID" type="number" v-model="QuizID">
+                    <input class="quizNameInput" placeholder="Enter Question Order" type="number" v-model="questionOrder">
                     <input class="quizNameInput" placeholder="Question" type="text" v-model="quizQuestion">
     
                     <input class="quizDirectionsInput" placeholder="Choice One" type="text" v-model="quizChoiceOne">
@@ -182,6 +182,27 @@
                 <!-- </div> -->
             </div>
 
+            <div v-if="onTakeQuiz && !modifyQuestions && !onDashboard">
+                <div class="logoutDiv">
+
+                    <button class="modifyQuestionsButton" v-on:click="backToDashboard"> Edit Quiz </button>
+                    <button class="modifyQuestionsButton" v-on:click="onModifyQuestions">Edit Questions</button>
+                    <button class="logoutButton" v-on:click="handleLogout">Logout</button>
+
+                </div>
+
+                <div class="actualQuiz" v-for="question of questions.results">
+                    <div class="question"><h2>{{question.order}}.{{question.question}}</h2></div>
+                    <button></button>
+                    <div class="choice_one"><h4>a){{question.choice_one}}</h4></div>
+                    <button></button>
+                    <div class=:choice_two><h4>b){{question.choice_two}}</h4></div>
+                    <button></button>
+                    <div class="choice_three"><h4>c){{question.choice_three}}</h4></div>
+                    <button></button>
+                    <div class="choice_four"><h4>d){{question.choice_four}}</h4></div>
+                </div>
+            </div>
         </div>
        
 
