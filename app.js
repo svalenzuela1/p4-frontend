@@ -1,7 +1,7 @@
 const app = new Vue({
     el: "#app",
     data: {
-        loggedin: true, 
+        loggedin: false, 
         JWT: "",
         loginUN: "",
         loginPW: "",
@@ -157,7 +157,7 @@ const app = new Vue({
                 this.newQuiz = ""
                 this.quizDirection = ""
                 this.getQuizzes()
-                alert(`${this.newQuiz} has been created`)
+                alert("New Quiz Has Been Created")
             })
         }, 
         editQuiz: function(event){
@@ -168,7 +168,7 @@ const app = new Vue({
                 directions: this.updateQuizDirections,
             }
 
-            fetch(`${URL}/quiz/quiz/${id}`, {
+            fetch(`${URL}/quiz/quiz/${id}/`, {
                 method: "PUT",
                 headers: {
                     Authorization: `JWT ${this.token}`,
@@ -177,7 +177,10 @@ const app = new Vue({
                 body: JSON.stringify(updated)
             })
             .then(response => {
+                this.updateQuizName = ""
+                this.updateQuizDirections = ""
                 this.getQuizzes() 
+                alert("Quiz Has Been Updated")
             })
         }, 
         deleteQuiz: function(event){
@@ -212,7 +215,22 @@ const app = new Vue({
                 console.log(data)
                 this.questions = data
             })
-        }, 
+        }
+        //, 
+        // editSelectQuiz: function(event){
+        //     this.editID = event.target.id 
+        //    console.log(event.target.id)
+
+        //     const QuizName = this.quizzes.find((quiz) => {
+
+        //    return quiz.id === this.editID
+        
+        // })
+            
+            //console.log(QuizName)
+            // const QuizDirection = this.quizzes.find((quiz) => quiz.id === this.editID).quiz
+            // console.log(QuizName, QuizDirection)
+        //}
     }
 })
 

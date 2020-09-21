@@ -77,11 +77,21 @@
                     <div class="updateQuizParentDiv">
                 <h1> Update or Delete Quiz </h1>
 
-                        <div class="updateQuizChildDiv">
+                        <div class="updateQuizChildDiv" v-for="quiz of quizzes.results">
                 <input class="updateQuizNameInput" placeholder="Update Quiz Name" type="text" v-model="updateQuizName">
                 <input class="updateQuizDirectionsInput" placeholder="Update Quiz Direction" type="text" v-model="updateQuizDirections">
-                <button class="updateQuizButton" v-on:click.prevent="editQuiz"> Update Quiz</button>
-                <!-- <button v-bind:id="quiz.id" v-on:click="deleteQuiz" >Delete Quiz</button> -->
+                <button class="updateQuizButton" v-bind:id="quiz.id" v-on:click.prevent="editQuiz" > Update Quiz</button>
+
+                <div class="quizzesDiv">
+                <h2>NAME : {{quiz.name}}</h2>
+                <h2>DIRECTIONS : {{quiz.directions}}</h2>
+                    </div>
+                <!-- <button v-bind:id="editID" v-on:click="editSelectQuiz">Update Select Quiz</button> -->
+                <h6>OR</h6>
+                <button v-bind:id="quiz.id" class="deleteQuizButton" v-on:click="deleteQuiz"> Delete Quiz</button>
+                <!--
+                    THIS GOES IN DELETE QUIZ BUTTON
+                    v-bind:id="quiz.id"-->
                         </div> 
                     </div>
                     </div>
@@ -114,7 +124,7 @@
 
 
         </div>
-        <button v-on:click="getQuizzes">Get</button>
+        <!-- <button v-on:click="getQuizzes">Get</button> -->
         <!-- 
             <h1>Choose a quiz</h1>
         <button> Choose </button> 
