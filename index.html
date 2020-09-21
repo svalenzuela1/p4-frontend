@@ -193,15 +193,10 @@
 
                 <div class="actualQuiz" v-for="question of questions.results">
                     <div class="question"><h2>{{question.order}}.{{question.question}}</h2></div>
-                    <button>Partial Update</button>
-                    <div class="choice_one"><h4>a){{question.choice_one}}</h4></div>
-                    <button>Partial Update</button>
-                    <div class=:choice_two><h4>b){{question.choice_two}}</h4></div>
-                    <button>Partial Update</button>
-                    <div class="choice_three"><h4>c){{question.choice_three}}</h4></div>
-                    <button>Partial Update</button>
-                    <div class="choice_four"><h4>d){{question.choice_four}}</h4></div>
-                    <button>Partial Update</button>
+                    <div class="choice_one"><h4>a.){{question.choice_one}}</h4></div>
+                    <div class=:choice_two><h4>b.){{question.choice_two}}</h4></div>
+                    <div class="choice_three"><h4>c.){{question.choice_three}}</h4></div>
+                    <div class="choice_four"><h4>d.){{question.choice_four}}</h4></div>
                 </div>
 
                 <!-- <div class="updateQuizChildDiv">
