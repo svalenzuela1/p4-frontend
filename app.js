@@ -19,19 +19,19 @@ const app = new Vue({
         questions: [],
         currentQuiz: []
     }, 
-    computed: { 
-        q: function(){
-            if(this.quizzes.results){
-            return this.quizzes.results.map((quiz,index) => {
-                return {
-                    quiz: this.quizzes.results[index],
-                    questions: this.questions.results[index]
-                }
-            }) } else {
-               return []
-            }
-        }
-    },
+    // computed: { 
+    //     q: function(){
+    //         if(this.quizzes.results){
+    //         return this.quizzes.results.map((quiz,index) => {
+    //             return {
+    //                 quiz: this.quizzes.results[index],
+    //                 questions: this.questions.results[index]
+    //             }
+    //         }) } else {
+    //            return []
+    //         }
+    //     }
+    // },
     methods: {
         chooseQuiz: function(event){
             const id = event.target.id 
@@ -157,6 +157,7 @@ const app = new Vue({
                 this.newQuiz = ""
                 this.quizDirection = ""
                 this.getQuizzes()
+                alert(`${this.newQuiz} has been created`)
             })
         }, 
         editQuiz: function(event){

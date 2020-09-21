@@ -74,12 +74,16 @@
                     </div>
 
                 <!-- UPDATE-->
-                    <div class="updateQuiz">
-                <h1> Update Quiz </h1>
+                    <div class="updateQuizParentDiv">
+                <h1> Update or Delete Quiz </h1>
 
-                <input placeholder="Update Quiz Name" type="text" v-model="updateQuizName">
-                <input placeholder="Update Quiz Direction" type="text" v-model="updateQuizDirections">
-                <button v-on:click.prevent="editQuiz"> Update Quiz</button>
+                        <div class="updateQuizChildDiv">
+                <input class="updateQuizNameInput" placeholder="Update Quiz Name" type="text" v-model="updateQuizName">
+                <input class="updateQuizDirectionsInput" placeholder="Update Quiz Direction" type="text" v-model="updateQuizDirections">
+                <button class="updateQuizButton" v-on:click.prevent="editQuiz"> Update Quiz</button>
+                <!-- <button v-bind:id="quiz.id" v-on:click="deleteQuiz" >Delete Quiz</button> -->
+                        </div> 
+                    </div>
                     </div>
                 <!--DONE-->
         <!-- <div class="quizzes" v-for="(quiz,index) of quizzes.results" >
@@ -128,6 +132,5 @@
         </div>
        
 
-    </div>
 </body>
 </html>
