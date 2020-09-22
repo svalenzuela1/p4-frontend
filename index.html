@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <!--Vue-->
-<!-- <link href="https://cdn.jsdelivr.net/npm/vuetify@1.2.2/dist/vuetify.min.css" rel="stylesheet" />  -->
+    
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@1.2.2/dist/vuetify.min.js"></script>
 
@@ -96,7 +94,6 @@
                 <h2>NAME : {{quiz.name}}</h2>
                 <h2>DIRECTIONS : {{quiz.directions}}</h2>
                     </div>
-                <!-- <button v-bind:id="editID" v-on:click="editSelectQuiz">Update Select Quiz</button> -->
                 <h6>OR</h6>
                 <button v-bind:id="quiz.id" class="deleteQuizButton" v-on:click="deleteQuiz"> Delete Quiz</button>
                
@@ -106,52 +103,13 @@
                     </div>
 
                     
-                <!--DONE-->
-        <!-- <div class="quizzes" v-for="(quiz,index) of quizzes.results" >
-            <h1>{{quiz.name}}</h1>
-            <h3>{{quiz.directions}}</h3>
-
-            <button v-bind:id="index" v-on:click="chooseQuiz"> Take Quiz</button> -->
-
-            <!-- <h5>{{}}</h5>
-            
-            <div v-bind:id="quiz.id" v-for="question of questions.results[index]" v-if="questions.length > 0">
-
-
                 
-                <h5> {{question.question}}</h5>
-            </div> -->
-            <!--QUESTIONS DIV-->
-           <!-- <button v-bind:id="quiz.id" v-on:click="deleteQuiz" >Delete Quiz</button> <button>Update Quiz</button>
-                </div>
-
-                <div> 
-                    <div v-for="q of currentQuiz">  -->
-
-                        <!-- <h5> {{q.question}}</h5> -->
-
-                    <!-- </div>
-                </div> -->
-
 
         </div>
-        <!-- <button v-on:click="getQuizzes">Get</button> -->
-        <!-- 
-            <h1>Choose a quiz</h1>
-        <button> Choose </button> 
-        <button v-on:click="getQuizzes">Get</button> <button v-on:click="postQuiz"> Post</button>
-
-        <div><button> Partial Update(PATCH)</button></div>
-
-        <div class="QuizOne">
-            <h1> </h1>
-            <button v-on:click="deleteQuiz">Delete</button> <button v-on:click="updateQuiz">Update</button>
-        </div> 
-        -->
         
 
             </div>
-
+            <!-- EDIT QUESTIONS PAGE-->
             <div v-if="modifyQuestions && !onDashboard && !onTakeQuiz">
                 <div class="logoutDiv">
                 <button class="takeQuizButton" v-on:click="backToDashboard"> Edit Quiz </button>
@@ -202,6 +160,9 @@
                         </div>
                 <!-- </div> -->
             </div>
+            <!-- END OF EDIT QUESTIONS PAGE -->
+
+            <!--   START OF TAKE QUIZ PAGE -->
 
             <div v-if="onTakeQuiz && !modifyQuestions && !onDashboard">
                 <div class="logoutDiv">
@@ -220,7 +181,7 @@
                     <div class="choice_four"><h4>d.){{question.choice_four}}</h4></div>
                 </div>
         </div>
-       
+       <!-- END OF TAKE QUIZ PAGE -->
 
 </body>
 </html>
