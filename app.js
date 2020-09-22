@@ -17,7 +17,6 @@ const app = new Vue({
         updateQuizName: "",
         updateQuizDirections: "",
         questions: [],
-        currentQuiz: [],
         modifyQuestions: false,
         onDashboard: false,
         onTakeQuiz: false,
@@ -36,50 +35,7 @@ const app = new Vue({
         updatedQuizID: 0,
         updatedQuestionOrder: 0
     }, 
-    // computed: { 
-    //     q: function(){
-    //         if(this.quizzes.results){
-    //         return this.quizzes.results.map((quiz,index) => {
-    //             return {
-    //                 quiz: this.quizzes.results[index],
-    //                 questions: this.questions.results[index]
-    //             }
-    //         }) } else {
-    //            return []
-    //         }
-    //     }
-    // },
     methods: {
-        hamburger: function(){
-    const $hamburger = $(".burger")
-    const $Links = $(".link")
-    let show = false;
-
-    const showMenu = (event) => {
-        if (show) {
-            $Links.each(function(index){
-            $(this).css("display","none")
-        })
-        show = false
-    } else {
-        $Links.each(function(index){
-            $(this).css("display","block")
-        })
-        show = true
-    }
-}
-
-// $hamburger.on("click", showMenu)
-
-         },
-        selector: function(){
-            $("h4").toggle(
-                function(){$("h4").css({"color": "red"});},
-                function(){$("h4").css({"color": "blue"});},
-                function(){$("h4").css({"color": "green"});
-              });
-              
-        },
         takeQuizPage: function(){
             this.modifyQuestions = false
             this.onDashboard = false 
@@ -97,26 +53,6 @@ const app = new Vue({
             this.getQuestions()
             
         },
-        chooseQuiz: function(event){
-            const id = event.target.id 
-            this.currentQuiz = this.questions.results[id]
-
-            // fetch(`${URL}/quiz/questions/{id}/`, {
-            //     method: "GET",
-            //     headers:{
-            //         Authorization: `JWT ${this.token}`
-            //     },
-            //     body: JSON.stringify()
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-
-            //     console.log(data)
-            //     // this.q = data
-                
-            // })
-        },
-
         handleLogin: function(){
             const URL = this.prodURL ? this.prodURL : this.devURL
             console.log(URL)
@@ -137,21 +73,14 @@ const app = new Vue({
                     alert("error logging in")
 
             } else {
-
                 this.user = data.user
                 this.token = data.token
                 this.loggedin = true 
                 this.dashboard = true
                 this.getQuizzes()
                 this.getQuestions()
-
-
-
-            
-                //UNCOMMENT WHEN ADDING FINISHING TOUCHES
                 this.loginUN = ""
                 this.loginPW = ""
-                //The above just resets username and password 
                 }
             })
         },
@@ -185,8 +114,6 @@ const app = new Vue({
                  this.createUN = ""
                  }
              })
-
-            //  
 
         },
         getQuizzes: function(){
@@ -363,67 +290,6 @@ const app = new Vue({
                 this.getQuestions()
 
             })
-         }
-         //,
-        // partialQuestionUpdate: function(event){
-        //     const URL = this.prodURL ? this.prodURL : this.devURL
-        //     const id = event.target.id 
-        //     const updated = { 
-        //         quiz: this.updatedQuizID,
-        //         order: this.updatedquestionOrder, 
-        //         question: this.updatedQuizQuestion,
-        //         choice_one: this.updatedQuizChoiceOne,
-        //         choice_two: this.updatedQuizChoiceTwo,
-        //         choice_three: this.updatedQuizChoiceThree,
-        //         choice_four: this.updatedQuizChoiceFour
-        //     }
-
-        //     fetch(`${URL}/quiz/questions/${id}/`, {
-        //         method: "PATCH",
-        //         headers: {
-        //             Authorization: `JWT ${this.token}`,
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(updated)
-        //     })
-        //     .then(response => {
-        //         this.updatedQuizQuestion,
-        //         this.updatedQuizChoiceOne,
-        //         this.updatedQuizChoiceTwo,
-        //         this.updatedQuizChoiceThree,
-        //         this.updatedQuizChoiceFour
-        //         this.getQuestions() 
-        //         alert("Quiz Has Been Partially Updated")
-        //     })
-        // },
-        // partialQuizUpdate: function(event){
-        //     const URL = this.prodURL ? this.prodURL : this.devURL
-        //     const id = event.target.id 
-        //     const updated = {
-        //         name: this.updateQuizName,
-        //         directions: this.updateQuizDirections,
-        //     }
-
-        //     fetch(`${URL}/quiz/quiz/${id}/`, {
-        //         method: "PATCH",
-        //         headers: {
-        //             Authorization: `JWT ${this.token}`,
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(updated)
-        //     })
-        //     .then(response => {
-        //         if(this.updateQuizName){
-        //         this.updateQuizName = ""
-        //         this.getQuizzes() 
-        //         alert("Quiz Has Been Updated")
-        //         } else if(this.updateQuizDirections){
-        //         this.updateQuizDirections = ""
-        //         this.getQuizzes() 
-        //         alert("Quiz Has Been Updated")
-        //         }
-        //     })
-        // }
-        
+         } 
     }
 })
