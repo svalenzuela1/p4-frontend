@@ -7,23 +7,22 @@ APPLIES TO BACKEND AND FRONTEND
 |  Day | Deliverable | Status
 |---|---| ---|
 |Day 1 - Friday| Deploy to Netlify | Complete
-|Day 2 - Sunday| Project Description | Incomplete
-|Day 2 - Sunday| Wireframes / Priority Matrix / Timeline `backend` and `frontend`| Incomplete
-|Day 3 - Monday| Work on Backend | Incomplete
-|Day 6 - Thursday| Begin Frontend | Incomplete
-|Day 6 - Thursday| Core Application Structure (HTML, CSS, etc.) | Incomplete
-|Day 6 - Thursday| Create Frontend Login | Incomplete
-|Day 6 - Thursday| Start Mobile Responsive Design | Incomplete
-|Day 7 - Friday| Start Tablet & Desktop Responsive Design | Incomplete
-|Day 8 - Saturday| Continue to Debug Frontend | Incomplete
-|Day 9 - Sunday| Complete MVP | Incomplete
+|Day 2 - Sunday| Project Description | Complete
+|Day 2 - Sunday| Wireframes / Priority Matrix / Timeline `backend` and `frontend`| Complete
+|Day 3 - Monday| Work on Backend | Complete
+|Day 6 - Thursday| Begin Frontend | Complete
+|Day 6 - Thursday| Core Application Structure (HTML, CSS, etc.) | Complete
+|Day 6 - Thursday| Create Frontend Login | Complete
+|Day 6 - Thursday| Start Mobile Responsive Design | Complete
+|Day 7 - Friday| Start Tablet & Desktop Responsive Design | Complete
+|Day 8 - Saturday| Continue to Debug Frontend | Complete
+|Day 9 - Sunday| Complete MVP | Complete
 |Day 11 - Tuesday| Present | Incomplete
 
 
 ## Project Description
 
-his project will be a quiz web application, where a user is able to login and take a multiple or user input answer
-choice quiz. As of Sunday 9/13, the application has a login, question and answer feature. 
+This project will be a quiz web application, where a user is able to login and modify and add quizzes. As of Sunday 9/13, the application has a login, question and answer feature. 
 
 ## Time/Priority Matrix 
 
@@ -52,12 +51,12 @@ choice quiz. As of Sunday 9/13, the application has a login, question and answer
 #### MVP
 | Component | Priority | Estimated Time | Time Invetsted | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| Frontend Login Dashboard | H | 5hr | -hr | -hr|
-| Create User Profile Frontend | H | 2hr | hr | -hr|
-| Question  | H | 3hr | hr | -hr|
-| Answer/ Answers | H | 5hr | -hr | -hr|
-| Debugging Frontend | H | 5hr | -hr | -hr|
-| Total | H | 20hrs| -hrs | -hrs |
+| Frontend Login Dashboard | H | 5hr | 2hr | 2hr|
+| Create User Profile Frontend | H | 2hr | 1hr | 1hr|
+| Question  | H | 3hr | 12hr | 12hr|
+| Answer/ Answers | H | 5hr | 12hr | 12hr|
+| Debugging Frontend | H | 5hr | 20hr | 20hr|
+| Total | H | 20hrs| -hrs | 51hrs |
 
 #### PostMVP
 | Component | Priority | Estimated Time | Time Invetsted | Actual Time |
@@ -77,9 +76,39 @@ TBD
 Use this section to include a brief code snippet of functionality that you are proud of an a brief description  
 
 ```
-function reverse(string) {
-	// here is the code to reverse a string of text
-}
+ editQuestion: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const id = event.target.id 
+            const updated = { 
+                quiz: this.updatedQuizID,
+                order: this.updatedquestionOrder, 
+                question: this.updatedQuizQuestion,
+                choice_one: this.updatedQuizChoiceOne,
+                choice_two: this.updatedQuizChoiceTwo,
+                choice_three: this.updatedQuizChoiceThree,
+                choice_four: this.updatedQuizChoiceFour
+            }
+
+            fetch(`${URL}/quiz/questions/${id}/`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `JWT ${this.token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updated)
+            })
+            .then(response => {
+                this.updatedQuizID,
+                this.updatedQuestionOrder,
+                this.updatedQuizQuestion,
+                this.updatedQuizChoiceOne,
+                this.updatedQuizChoiceTwo,
+                this.updatedQuizChoiceThree,
+                this.updatedQuizChoiceFour
+                this.getQuestions() 
+                alert("Quiz Has Been Updated")
+            })
+        }, 
 ```
 
 ## Issues and Resolutions
