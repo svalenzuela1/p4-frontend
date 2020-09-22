@@ -8,7 +8,7 @@ const app = new Vue({
         createUN: "",
         createPW: "",
         devURL: "http://localhost:8000",
-        prodURL: null,
+        prodURL: "https://p4-backend.herokuapp.com",
         user: null,
         token: null,
         quizzes: [],
